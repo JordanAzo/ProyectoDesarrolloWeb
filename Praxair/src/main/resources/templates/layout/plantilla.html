@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praxair - Gases Industriales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #00a651;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-card h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .content-card p {
+            line-height: 1.6;
+            text-align: justify;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Card specific styles */
+        .quienes-somos {
+            border-top: 4px solid #4a90e2;
+        }
+
+        .mision {
+            border-top: 4px solid #00a651;
+        }
+
+        .vision {
+            border-top: 4px solid #7b68ee;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="C:\Users\godin\OneDrive\Pictures\Screenshots\Captura de pantalla 2025-06-14 133711.png" alt="Praxair Logo">
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#gases">Gases Industriales</a></li>
+                    <li><a href="#accesorios">Accesorios de Soldadura</a></li>
+                    <li><a href="#agenda">Agendar visita técnica</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">🛒</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <div class="content-grid">
+            <!-- ¿Quiénes Somos? -->
+            <div class="content-card quienes-somos">
+                <h2>¿QUIÉNES SOMOS?</h2>
+                <p>
+                    Praxair es una empresa líder en el sector de gases industriales, especializada en la distribución y comercialización de gases técnicos, industriales y materiales, así como equipos relacionados. Con más de 100 años de experiencia en el mercado, nos hemos consolidado como un socio estratégico confiable para industrias que requieren soluciones especializadas en gases.
+                </p>
+                <p>
+                    Nuestro compromiso va más allá de ofrecer solo productos de la más alta calidad, sino también servicios técnicos especializados que incluyen el diseño, instalación y mantenimiento de sistemas de gases industriales. Contamos con un equipo de profesionales altamente especializados que comprende las necesidades específicas de cada industria, desde la manufactura y construcción hasta la industria alimentaria y farmacéutica.
+                </p>
+                <p>
+                    En Praxair, entendemos que cada cliente tiene requerimientos únicos, por lo que desarrollamos soluciones personalizadas que optimizan procesos, mejoran la eficiencia operativa y garantizan la seguridad en el manejo de gases industriales.
+                </p>
+            </div>
+
+            <!-- Misión -->
+            <div class="content-card mision">
+                <h2>MISIÓN</h2>
+                <p>
+                    Proveer soluciones integrales en gases industriales, equipos de soldadura de la más alta calidad, mediante la distribución eficiente de productos especializados y la implementación de tecnologías técnicas seguras y confiables. Nos comprometemos a ser el socio estratégico que impulsa la productividad y el crecimiento de nuestros clientes, ofreciendo asesoría técnica especializada y un servicio excepcional que supere sus expectativas.
+                </p>
+                <p>
+                    Trabajamos día a día para contribuir al desarrollo industrial de nuestra región, manteniendo los más altos estándares de seguridad, calidad y responsabilidad ambiental en todas nuestras operaciones.
+                </p>
+            </div>
+
+            <!-- Visión -->
+            <div class="content-card vision">
+                <h2>VISIÓN</h2>
+                <p>
+                    Ser la empresa líder y de referencia en el mercado de gases industriales y equipos de soldadura, reconocida por nuestra excelencia en el servicio, innovación tecnológica y compromiso con la sostenibilidad. Aspiramos a expandir nuestra presencia en el mercado regional latinoamericano, convirtiéndonos en la primera opción para empresas que buscan soluciones especializadas en gases industriales.
+                </p>
+                <p>
+                    Visualizamos un futuro donde somos sinónimo de confiabilidad, calidad técnica y servicio personalizado, contribuyendo al crecimiento sostenible de las industrias que servimos mediante la implementación de tecnologías avanzadas y prácticas ambientalmente responsables.
+                </p>
+                <p>
+                    Nos proyectamos hacia el 2030 como reconocidos como la empresa que transforma la manera en que las industrias utilizan los gases industriales, estableciendo nuevos estándares de eficiencia, seguridad y sostenibilidad en el sector.
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
