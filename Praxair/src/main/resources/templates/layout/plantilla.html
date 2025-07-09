@@ -3,9 +3,7 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Praxair - Gases Industriales</title>
@@ -236,36 +234,106 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         }
     </style>
 </head>
-<body>
-    <!-- Register Notification -->
-    <div class="register-notification" id="registerNotification">
-        <p>¡Parece que llegaste desde el registro! ¿Te gustaría completar tu registro para acceder a todos nuestros servicios?</p>
-        <a href="../registro/registro.html" class="register-btn">Completar Registro</a>
-        <button class="close-notification" onclick="closeNotification()" title="Cerrar">×</button>
-    </div>
 
-    <!-- Header -->
-    <header class="header">
+<body>
+    <!-- Fragmento HEADER -->
+    <header th:fragment="header" class="header">
+        <!-- Register Notification -->
+        <div class="register-notification" id="registerNotification">
+            <p>¡Parece que llegaste desde el registro! ¿Te gustaría completar tu registro para acceder a todos nuestros servicios?</p>
+            <a href="/registro/registro.html" class="register-btn">Completar Registro</a>
+            <button class="close-notification" onclick="closeNotification()" title="Cerrar">×</button>
+        </div>
+
         <div class="nav-container">
             <div class="logo">
-                <img src="C:\Users\godin\OneDrive\Pictures\Screenshots\Captura de pantalla 2025-06-14 133711.png" alt="Praxair Logo">
+                <img src="https://lnk.ink/eInsg" alt="Praxair Logo">
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="plantilla.html" class="active">Inicio</a></li>
-                    <li><a href="../gases/fragmentos.html">Gases Industriales</a></li>
+                    <li><a href="/" class="active">Inicio</a></li>
+                    <li><a href="/gases/fragmentos">Gases Industriales</a></li>
                     <li><a href="#accesorios">Accesorios de Soldadura</a></li>
                     <li><a href="#agenda">Agendar visita técnica</a></li>
                 </ul>
             </nav>
             <div style="display: flex; align-items: center; gap: 15px;">
-                <a href="../registro/registro.html" class="register-btn">Registrarse</a>
+                <li><a href="/registro/registro" class="register-btn">Registrarse</a></li>
                 <div class="cart-icon">🛒</div>
             </div>
         </div>
+
+        <script>
+            // Check if user came from registration page without completing registration
+            function checkRegistrationStatus() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const fromRegistration = urlParams.get('from') === 'registration';
+                const referrer = document.referrer;
+                
+                // Show notification if:
+                // 1. URL parameter indicates coming from registration, OR
+                // 2. Referrer is the registration page
+                if (fromRegistration || referrer.includes('registro.html')) {
+                    // Check if user actually completed registration
+                    const registrationCompleted = localStorage.getItem('registrationCompleted');
+                    
+                    if (!registrationCompleted) {
+                        showRegistrationNotification();
+                    }
+                }
+            }
+
+            function showRegistrationNotification() {
+                const notification = document.getElementById('registerNotification');
+                notification.classList.add('show');
+                
+                // Auto-hide after 10 seconds
+                setTimeout(() => {
+                    if (notification.classList.contains('show')) {
+                        closeNotification();
+                    }
+                }, 10000);
+            }
+
+            function closeNotification() {
+                const notification = document.getElementById('registerNotification');
+                notification.style.animation = 'slideDown 0.3s ease-out reverse';
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.style.animation = '';
+                }, 300);
+                
+                // Remember that user closed the notification
+                sessionStorage.setItem('registrationNotificationClosed', 'true');
+            }
+
+            // Check registration status when page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                // Don't show notification if user already closed it in this session
+                const notificationClosed = sessionStorage.getItem('registrationNotificationClosed');
+                
+                if (!notificationClosed) {
+                    checkRegistrationStatus();
+                }
+            });
+
+            // Clear registration completion flag when user leaves the page
+            window.addEventListener('beforeunload', function() {
+                // Only clear if going to registration page
+                if (performance.navigation.type === 1) { // Reload
+                    localStorage.removeItem('registrationCompleted');
+                }
+            });
+        </script>
     </header>
 
-    <!-- Main Content -->
+    <!-- Fragmento FOOTER (opcional) -->
+    <footer th:fragment="footer">
+        <p>&copy; 2025 Praxair - Gases Industriales. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Contenido principal (solo se usa cuando se accede directamente a plantilla.html) -->
     <main class="main-container">
         <div class="content-grid">
             <!-- ¿Quiénes Somos? -->
@@ -308,69 +376,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
     </main>
-
-    <script>
-        // Check if user came from registration page without completing registration
-        function checkRegistrationStatus() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const fromRegistration = urlParams.get('from') === 'registration';
-            const referrer = document.referrer;
-            
-            // Show notification if:
-            // 1. URL parameter indicates coming from registration, OR
-            // 2. Referrer is the registration page
-            if (fromRegistration || referrer.includes('registro.html')) {
-                // Check if user actually completed registration
-                const registrationCompleted = localStorage.getItem('registrationCompleted');
-                
-                if (!registrationCompleted) {
-                    showRegistrationNotification();
-                }
-            }
-        }
-
-        function showRegistrationNotification() {
-            const notification = document.getElementById('registerNotification');
-            notification.classList.add('show');
-            
-            // Auto-hide after 10 seconds
-            setTimeout(() => {
-                if (notification.classList.contains('show')) {
-                    closeNotification();
-                }
-            }, 10000);
-        }
-
-        function closeNotification() {
-            const notification = document.getElementById('registerNotification');
-            notification.style.animation = 'slideDown 0.3s ease-out reverse';
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-                notification.style.animation = '';
-            }, 300);
-            
-            // Remember that user closed the notification
-            sessionStorage.setItem('registrationNotificationClosed', 'true');
-        }
-
-        // Check registration status when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Don't show notification if user already closed it in this session
-            const notificationClosed = sessionStorage.getItem('registrationNotificationClosed');
-            
-            if (!notificationClosed) {
-                checkRegistrationStatus();
-            }
-        });
-
-        // Clear registration completion flag when user leaves the page
-        window.addEventListener('beforeunload', function() {
-            // Only clear if going to registration page
-            if (performance.navigation.type === 1) { // Reload
-                localStorage.removeItem('registrationCompleted');
-            }
-        });
-    </script>
 </body>
 </html>

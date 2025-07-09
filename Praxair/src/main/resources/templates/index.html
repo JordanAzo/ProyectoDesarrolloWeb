@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Praxair</title>        
+    </head>
+    <body>
+        <!-- Incluir el header -->
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        
+        <!-- Contenido principal de la página -->
+        <main class="main-container">
+            <div class="content-grid">
+                <!-- ¿Quiénes Somos? -->
+                <div class="content-card quienes-somos">
+                    <h2>¿QUIÉNES SOMOS?</h2>
+                    <p>
+                        Praxair es una empresa líder en el sector de gases industriales, especializada en la distribución y comercialización de gases técnicos, industriales y materiales, así como equipos relacionados. Con más de 100 años de experiencia en el mercado, nos hemos consolidado como un socio estratégico confiable para industrias que requieren soluciones especializadas en gases.
+                    </p>
+                    <p>
+                        Nuestro compromiso va más allá de ofrecer solo productos de la más alta calidad, sino también servicios técnicos especializados que incluyen el diseño, instalación y mantenimiento de sistemas de gases industriales. Contamos con un equipo de profesionales altamente especializados que comprende las necesidades específicas de cada industria, desde la manufactura y construcción hasta la industria alimentaria y farmacéutica.
+                    </p>
+                    <p>
+                        En Praxair, entendemos que cada cliente tiene requerimientos únicos, por lo que desarrollamos soluciones personalizadas que optimizan procesos, mejoran la eficiencia operativa y garantizan la seguridad en el manejo de gases industriales.
+                    </p>
+                </div>
+
+                <!-- Misión -->
+                <div class="content-card mision">
+                    <h2>MISIÓN</h2>
+                    <p>
+                        Proveer soluciones integrales en gases industriales, equipos de soldadura de la más alta calidad, mediante la distribución eficiente de productos especializados y la implementación de tecnologías técnicas seguras y confiables. Nos comprometemos a ser el socio estratégico que impulsa la productividad y el crecimiento de nuestros clientes, ofreciendo asesoría técnica especializada y un servicio excepcional que supere sus expectativas.
+                    </p>
+                    <p>
+                        Trabajamos día a día para contribuir al desarrollo industrial de nuestra región, manteniendo los más altos estándares de seguridad, calidad y responsabilidad ambiental en todas nuestras operaciones.
+                    </p>
+                </div>
+
+                <!-- Visión -->
+                <div class="content-card vision">
+                    <h2>VISIÓN</h2>
+                    <p>
+                        Ser la empresa líder y de referencia en el mercado de gases industriales y equipos de soldadura, reconocida por nuestra excelencia en el servicio, innovación tecnológica y compromiso con la sostenibilidad. Aspiramos a expandir nuestra presencia en el mercado regional latinoamericano, convirtiéndonos en la primera opción para empresas que buscan soluciones especializadas en gases industriales.
+                    </p>
+                    <p>
+                        Visualizamos un futuro donde somos sinónimo de confiabilidad, calidad técnica y servicio personalizado, contribuyendo al crecimiento sostenible de las industrias que servimos mediante la implementación de tecnologías avanzadas y prácticas ambientalmente responsables.
+                    </p>
+                    <p>
+                        Nos proyectamos hacia el 2030 como reconocidos como la empresa que transforma la manera en que las industrias utilizan los gases industriales, estableciendo nuevos estándares de eficiencia, seguridad y sostenibilidad en el sector.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Incluir el footer (opcional) -->
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>
+    </body>
+</html>
