@@ -66,9 +66,97 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             color: #00a651;
         }
 
+        .nav-menu a.active {
+            color: #00a651;
+            font-weight: 600;
+        }
+
         .cart-icon {
             font-size: 24px;
             cursor: pointer;
+        }
+
+        /* Register Button */
+        .register-notification {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .register-notification.show {
+            display: block;
+        }
+
+        .register-notification p {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #00a651 0%, #00c755 100%);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 166, 81, 0.3);
+        }
+
+        .register-notification .register-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            border: 2px solid white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .register-notification .register-btn:hover {
+            background: white;
+            color: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .close-notification:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         /* Main Content */
@@ -139,10 +227,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             .content-card {
                 padding: 20px;
             }
+
+            .register-btn {
+                display: block;
+                margin: 10px auto;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Register Notification -->
+    <div class="register-notification" id="registerNotification">
+        <p>¡Parece que llegaste desde el registro! ¿Te gustaría completar tu registro para acceder a todos nuestros servicios?</p>
+        <a href="../registro/registro.html" class="register-btn">Completar Registro</a>
+        <button class="close-notification" onclick="closeNotification()" title="Cerrar">×</button>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="nav-container">
@@ -151,13 +252,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#gases">Gases Industriales</a></li>
+                    <li><a href="plantilla.html" class="active">Inicio</a></li>
+                    <li><a href="../gases/fragmentos.html">Gases Industriales</a></li>
                     <li><a href="#accesorios">Accesorios de Soldadura</a></li>
                     <li><a href="#agenda">Agendar visita técnica</a></li>
                 </ul>
             </nav>
-            <div class="cart-icon">🛒</div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="../registro/registro.html" class="register-btn">Registrarse</a>
+                <div class="cart-icon">🛒</div>
+            </div>
         </div>
     </header>
 
@@ -204,5 +308,69 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
     </main>
+
+    <script>
+        // Check if user came from registration page without completing registration
+        function checkRegistrationStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromRegistration = urlParams.get('from') === 'registration';
+            const referrer = document.referrer;
+            
+            // Show notification if:
+            // 1. URL parameter indicates coming from registration, OR
+            // 2. Referrer is the registration page
+            if (fromRegistration || referrer.includes('registro.html')) {
+                // Check if user actually completed registration
+                const registrationCompleted = localStorage.getItem('registrationCompleted');
+                
+                if (!registrationCompleted) {
+                    showRegistrationNotification();
+                }
+            }
+        }
+
+        function showRegistrationNotification() {
+            const notification = document.getElementById('registerNotification');
+            notification.classList.add('show');
+            
+            // Auto-hide after 10 seconds
+            setTimeout(() => {
+                if (notification.classList.contains('show')) {
+                    closeNotification();
+                }
+            }, 10000);
+        }
+
+        function closeNotification() {
+            const notification = document.getElementById('registerNotification');
+            notification.style.animation = 'slideDown 0.3s ease-out reverse';
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.style.animation = '';
+            }, 300);
+            
+            // Remember that user closed the notification
+            sessionStorage.setItem('registrationNotificationClosed', 'true');
+        }
+
+        // Check registration status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Don't show notification if user already closed it in this session
+            const notificationClosed = sessionStorage.getItem('registrationNotificationClosed');
+            
+            if (!notificationClosed) {
+                checkRegistrationStatus();
+            }
+        });
+
+        // Clear registration completion flag when user leaves the page
+        window.addEventListener('beforeunload', function() {
+            // Only clear if going to registration page
+            if (performance.navigation.type === 1) { // Reload
+                localStorage.removeItem('registrationCompleted');
+            }
+        });
+    </script>
 </body>
 </html>
